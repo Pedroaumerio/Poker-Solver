@@ -1,0 +1,222 @@
+/* ===== App Layout ===== */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--gradient-bg);
+}
+
+/* Header */
+.app__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-xl);
+  background: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.app__back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.app__back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.app__header-center {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.app__game-type-badge {
+  padding: 4px 14px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.app__hand-count {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.app__header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.app__toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.app__toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.app__toggle-btn--active {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.3);
+  color: var(--accent-primary-hover);
+}
+
+.app__toggle-label {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .app__toggle-label {
+    display: inline;
+  }
+}
+
+.app__mini-score {
+  display: flex;
+  gap: var(--space-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.app__mini-score-correct {
+  color: var(--color-success);
+}
+
+.app__mini-score-wrong {
+  color: var(--color-error);
+}
+
+/* Main */
+.app__main {
+  flex: 1;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.app__game-area {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: var(--space-xl);
+}
+
+.app__game-area--with-sidebar {
+  flex-wrap: nowrap;
+}
+
+.app__game-column {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Sidebar */
+.app__sidebar {
+  width: 360px;
+  flex-shrink: 0;
+  animation: slideInRight 0.3s ease-out;
+}
+
+/* Next hand */
+.app__next-hand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: var(--space-md) 0;
+}
+
+.app__next-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 40px;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: var(--radius-xl);
+  color: white;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-glow);
+}
+
+.app__next-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+}
+
+.app__next-btn:active {
+  transform: translateY(0);
+}
+
+.app__next-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .app__game-area {
+    flex-direction: column;
+  }
+
+  .app__sidebar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .app__header {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .app__main {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .app__game-type-badge {
+    display: none;
+  }
+}

@@ -1,0 +1,164 @@
+/* ===== Hand History ===== */
+.hand-history {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Score */
+.hand-history__score {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+}
+
+.hand-history__score-main {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.hand-history__score-ring {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+}
+
+.hand-history__score-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hand-history__score-percent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.1rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+}
+
+.hand-history__score-details h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.hand-history__score-counts {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.hand-history__score-counts span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.hand-history__score-correct {
+  color: var(--color-success) !important;
+}
+
+.hand-history__score-wrong {
+  color: var(--color-error) !important;
+}
+
+/* List */
+.hand-history__list {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+}
+
+.hand-history__list-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.hand-history__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.hand-history__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+}
+
+.hand-history__item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.hand-history__item--correct {
+  border-left: 3px solid var(--color-success);
+}
+
+.hand-history__item--wrong {
+  border-left: 3px solid var(--color-error);
+}
+
+.hand-history__item-status {
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.hand-history__item-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.hand-history__item-hand {
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+}
+
+.hand-history__item-position {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 1px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+}
+
+.hand-history__item-action {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.hand-history__item-ev {
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  min-width: 60px;
+  text-align: right;
+}
+
+.hand-history__item-ev--positive {
+  color: var(--color-success);
+}
+
+.hand-history__item-ev--negative {
+  color: var(--color-error);
+}

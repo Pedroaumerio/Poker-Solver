@@ -1,0 +1,453 @@
+/* ═══════════════════════════════════════════════
+   POKER TABLE — Oval layout with all seats
+   ═══════════════════════════════════════════════ */
+
+/* ── Container ── */
+.oval-table-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 16 / 10;
+  margin: 0 auto;
+  margin-bottom: 8px;
+  animation: fadeInScale 0.5s ease-out;
+}
+
+/* ── Rail (outer border) ── */
+.oval-table__rail {
+  position: absolute;
+  inset: 12% 6%;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #3d2517, #2a1a10, #1c0f08);
+  padding: 8px;
+  box-shadow:
+    0 6px 30px rgba(0, 0, 0, 0.6),
+    0 0 0 3px rgba(60, 35, 20, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+
+/* ── Felt (green surface) ── */
+.oval-table__felt {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 45% 40%, #1f7a45 0%, #166b38 30%, #0f5a2d 60%, #0a4520 100%);
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 50px rgba(0, 0, 0, 0.35),
+    inset 0 0 120px rgba(0, 0, 0, 0.15);
+}
+
+/* Felt texture overlay */
+.oval-table__felt::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    repeating-conic-gradient(rgba(255, 255, 255, 0.008) 0deg, transparent 1deg, transparent 3deg);
+  pointer-events: none;
+}
+
+/* ── Center Logo ── */
+.oval-table__center-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3.5rem;
+  color: rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Pot Display ── */
+.oval-table__pot {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+}
+
+.oval-table__pot-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.oval-table__pot-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--accent-gold-light);
+  font-family: var(--font-mono);
+  text-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+}
+
+/* ── Blinds ── */
+.oval-table__blinds {
+  position: absolute;
+  top: 56%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* ── Game Badge ── */
+.oval-table__game-badge {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 3px 14px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+/* ── Result Overlay ── */
+.oval-table__result {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 28px;
+  border-radius: var(--radius-xl);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  z-index: 20;
+  animation: fadeInScale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
+}
+
+.oval-table__result--correct {
+  background: rgba(16, 185, 129, 0.92);
+  color: white;
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+}
+
+.oval-table__result--wrong {
+  background: rgba(239, 68, 68, 0.92);
+  color: white;
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.5);
+}
+
+/* Table glow on result */
+.oval-table--correct .oval-table__rail {
+  box-shadow:
+    0 6px 30px rgba(0, 0, 0, 0.6),
+    0 0 0 3px rgba(16, 185, 129, 0.4),
+    0 0 40px rgba(16, 185, 129, 0.15);
+}
+
+.oval-table--wrong .oval-table__rail {
+  box-shadow:
+    0 6px 30px rgba(0, 0, 0, 0.6),
+    0 0 0 3px rgba(239, 68, 68, 0.4),
+    0 0 40px rgba(239, 68, 68, 0.15);
+}
+
+/* ═══════════════════════════════════════════
+   PLAYER SEATS
+   ═══════════════════════════════════════════ */
+
+.oval-seat {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  z-index: 5;
+  animation: fadeIn 0.35s ease-out both;
+  transition: opacity var(--transition-normal);
+}
+
+/* ── Position Badge ── */
+.oval-seat__position {
+  padding: 4px 12px;
+  background: rgba(17, 24, 39, 0.88);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  backdrop-filter: blur(6px);
+  transition: all var(--transition-normal);
+}
+
+/* ── Stack ── */
+.oval-seat__stack {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent-gold-light);
+  font-family: var(--font-mono);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  line-height: 1.1;
+}
+
+/* ── "VOCÊ" label ── */
+.oval-seat__you {
+  font-size: 0.5rem;
+  font-weight: 800;
+  color: var(--accent-primary-hover);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Cards ── */
+.oval-seat__cards {
+  display: flex;
+  gap: 2px;
+  margin-top: 1px;
+}
+
+.oval-seat__cards--hidden {
+  display: flex;
+  gap: 2px;
+}
+
+.oval-seat__card-back {
+  width: 18px;
+  height: 25px;
+  border-radius: 2px;
+  background: linear-gradient(145deg, #1a2744, #0f1a2e);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.oval-seat__card-back::after {
+  content: '♠';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.45rem;
+  color: rgba(99, 102, 241, 0.3);
+}
+
+/* ── Hand notation ── */
+.oval-seat__notation {
+  padding: 1px 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius-full);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: white;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+/* ── Dealer Button ── */
+.oval-seat__dealer {
+  position: absolute;
+  top: -5px;
+  right: -12px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1a1a1a;
+  font-size: 0.65rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 6px rgba(245, 158, 11, 0.5);
+  z-index: 10;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ═══════ Seat States ═══════ */
+
+/* Hero seat — highlighted */
+.oval-seat--hero .oval-seat__position {
+  background: rgba(99, 102, 241, 0.25);
+  border-color: rgba(99, 102, 241, 0.5);
+  color: var(--accent-primary-hover);
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.25);
+}
+
+.oval-seat--active .oval-seat__position {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Folded seat — dimmed */
+.oval-seat--folded {
+  opacity: 0.4;
+}
+
+.oval-seat--folded .oval-seat__cards--hidden {
+  display: none;
+}
+
+/* ═══════════════════════════════════════════
+   BET / ACTION CHIPS
+   ═══════════════════════════════════════════ */
+
+.oval-bet {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 3px 10px;
+  padding-left: 0;
+  border-radius: var(--radius-full);
+  border: 1px solid;
+  font-family: var(--font-mono);
+  z-index: 8;
+  animation: chipStack 0.3s ease-out both;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+}
+
+.oval-bet__label {
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding-left: 10px;
+
+
+}
+
+.oval-bet__size {
+  font-size: 0.5rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* ═══════════════════════════════════════════
+   ACTION LOG
+   ═══════════════════════════════════════════ */
+
+.oval-table__log {
+  position: absolute;
+  bottom: 10%;
+  right: 112%;
+  background: rgba(10, 15, 25, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  padding: 8px 12px;
+  min-width: 120px;
+  max-width: 170px;
+  z-index: 6;
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.4s ease-out;
+}
+
+.oval-table__log-title {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.08em;
+  margin-bottom: 5px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.oval-table__log-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+}
+
+.oval-table__log-pos {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--font-mono);
+  min-width: 38px;
+}
+
+.oval-table__log-action {
+  font-size: 0.6rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  .oval-table-container {
+    aspect-ratio: 14 / 10;
+  }
+
+  .oval-table__rail {
+    inset: 10% 4%;
+  }
+
+  .oval-seat__position {
+    padding: 2px 7px;
+    font-size: 0.55rem;
+  }
+
+  .oval-seat__stack {
+    font-size: 0.5rem;
+  }
+
+  .oval-seat__card-back {
+    width: 16px;
+    height: 22px;
+  }
+
+  .oval-table__pot-value {
+    font-size: 0.9rem;
+  }
+
+  .oval-bet {
+    padding: 1px 5px;
+  }
+
+  .oval-bet__label {
+    font-size: 0.4rem;
+  }
+
+  .oval-seat__dealer {
+    width: 14px;
+    height: 14px;
+    font-size: 0.45rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .oval-seat__cards .card--small {
+    width: 36px;
+    height: 50px;
+  }
+
+  .oval-table__center-logo {
+    font-size: 2rem;
+  }
+
+  .oval-table__game-badge {
+    font-size: 0.45rem;
+    padding: 2px 8px;
+  }
+}

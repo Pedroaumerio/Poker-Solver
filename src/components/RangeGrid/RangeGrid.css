@@ -1,0 +1,159 @@
+/* ===== Range Grid ===== */
+.range-grid {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  animation: fadeIn 0.4s ease-out;
+}
+
+.range-grid__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.range-grid__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.range-grid__percentage {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-primary-hover);
+  font-family: var(--font-mono);
+  padding: 2px 10px;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: var(--radius-full);
+}
+
+.range-grid__container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.range-grid__row {
+  display: flex;
+  gap: 2px;
+}
+
+.range-grid__cell {
+  flex: 1;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 2px;
+  cursor: default;
+  transition: all var(--transition-fast);
+  position: relative;
+  min-width: 0;
+}
+
+.range-grid__cell:hover {
+  z-index: 2;
+  transform: scale(1.3);
+  box-shadow: var(--shadow-lg);
+}
+
+.range-grid__cell-text {
+  font-size: 0.5rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* In range */
+.range-grid__cell--in-range {
+  background: rgba(16, 185, 129, 0.4);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.range-grid__cell--in-range .range-grid__cell-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.range-grid__cell--in-range.range-grid__cell--pair {
+  background: rgba(99, 102, 241, 0.5);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.range-grid__cell--in-range.range-grid__cell--suited {
+  background: rgba(34, 211, 238, 0.35);
+  border-color: rgba(34, 211, 238, 0.2);
+}
+
+/* Player hand */
+.range-grid__cell--player {
+  background: rgba(245, 158, 11, 0.6) !important;
+  border: 2px solid var(--accent-gold) !important;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+  animation: glow 2s ease-in-out infinite;
+  z-index: 1;
+}
+
+.range-grid__cell--player .range-grid__cell-text {
+  color: white;
+  font-weight: 800;
+}
+
+/* Legend */
+.range-grid__legend {
+  display: flex;
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.range-grid__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.range-grid__legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.range-grid__legend-swatch--in-range {
+  background: rgba(16, 185, 129, 0.5);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.range-grid__legend-swatch--out-range {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.range-grid__legend-swatch--player {
+  background: rgba(245, 158, 11, 0.6);
+  border: 1px solid var(--accent-gold);
+}
+
+.range-grid__empty {
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .range-grid__cell-text {
+    font-size: 0.35rem;
+  }
+}

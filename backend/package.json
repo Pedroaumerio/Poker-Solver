@@ -1,0 +1,17 @@
+{
+  "name": "poker-solver-backend",
+  "version": "1.0.0",
+  "description": "Backend API para Poker Solver Study",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.0"
+  }
+}
