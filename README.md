@@ -33,9 +33,9 @@ A plataforma é focada em três principais modalidades:
 
 ## 🖥️ Preview
 
-![Preview do sistema](./preview.png)
+![Preview do sistema](./"C:\Users\pedro\Downloads\solver.png")
 
-> Dica: adicione um print do seu sistema com o nome `preview.png` na raiz do projeto 😉
+<img width="1867" height="956" alt="image" src="https://github.com/user-attachments/assets/54246f66-761c-4e5f-8163-30a43f8e6f43"/>
 
 ---
 
@@ -76,12 +76,7 @@ Este projeto foi desenvolvido com o objetivo de:
 
 ---
 
-## 📌 Melhorias futuras
 
-* [ ] Sistema de login
-* [ ] Histórico de mãos jogadas
-* [ ] IA para sugestões automáticas
-* [ ] Dashboard de desempenho
 
 ---
 
