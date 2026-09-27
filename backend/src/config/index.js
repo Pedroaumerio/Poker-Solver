@@ -22,7 +22,9 @@ const config = {
   cors: {
     origin: process.env.NODE_ENV === 'production'
       ? 'https://seu-dominio.com'
-      : ['http://localhost:5173', 'http://localhost:3000'],
+      // Em dev, o Vite pode subir em qualquer porta livre (5173, 5174, ...)
+      // se a padrão já estiver ocupada — aceita qualquer localhost/127.0.0.1.
+      : /^http:\/\/(localhost|127\.0\.0\.1):\d+$/,
     credentials: true,
   },
 };

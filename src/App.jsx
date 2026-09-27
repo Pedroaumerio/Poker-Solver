@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import HomePage from './pages/Home';
 import GamePage from './pages/Game';
 import SimulatorPage from './pages/Simulator';
+import SolverPage from './pages/Solver';
 import useGameSession from './hooks/useGameSession';
 import useKeyboardShortcuts from './hooks/useKeyboardShortcuts';
 
@@ -13,11 +14,12 @@ import useKeyboardShortcuts from './hooks/useKeyboardShortcuts';
  *
  * Rotas:
  *  - null     → HomeScreen (seleção de formato)
- *  - 'sim'    → Simulador de situações
+ *  - 'sim'    → Simulador de situações (heurística preflop)
+ *  - 'solver' → Solver real pós-flop (CFR)
  *  - 'mtt'|'spin'|'cash' → GameScreen (treino)
  */
 export default function App() {
-  const [currentPage, setCurrentPage] = useState(null); // null | 'sim'
+  const [currentPage, setCurrentPage] = useState(null); // null | 'sim' | 'solver'
 
   const {
     gameType,
@@ -43,6 +45,11 @@ export default function App() {
     setCurrentPage('sim');
   }, []);
 
+  // Navega para o solver real (CFR)
+  const handleOpenSolver = useCallback(() => {
+    setCurrentPage('solver');
+  }, []);
+
   // Volta ao menu principal
   const handleBackToMenu = useCallback(() => {
     setCurrentPage(null);
@@ -60,12 +67,18 @@ export default function App() {
     return <SimulatorPage onBackToMenu={handleBackToMenu} />;
   }
 
+  // Solver real (CFR pós-flop)
+  if (currentPage === 'solver') {
+    return <SolverPage onBackToMenu={handleBackToMenu} />;
+  }
+
   // Página inicial
   if (!gameType) {
     return (
       <HomePage
         onSelectGameType={handleSelectGame}
         onOpenSimulator={handleOpenSimulator}
+        onOpenSolver={handleOpenSolver}
       />
     );
   }

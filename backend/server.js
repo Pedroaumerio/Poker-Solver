@@ -18,6 +18,7 @@ import cors from 'cors';
 import config from './src/config/index.js';
 import { testConnection } from './database/connection.js';
 import historyRoutes from './src/routes/historyRoutes.js';
+import solverRoutes from './src/routes/solverRoutes.js';
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // ── Rotas ──
 app.use('/api/history', historyRoutes);
+app.use('/api/solver', solverRoutes);
 
 // ── Health check ──
 app.get('/api/health', (req, res) => {

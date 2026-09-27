@@ -5,7 +5,7 @@ import './HomeScreen.css';
 /**
  * Tela inicial - Seleção do formato de jogo
  */
-export default function HomeScreen({ onSelectGameType, onOpenSimulator }) {
+export default function HomeScreen({ onSelectGameType, onOpenSimulator, onOpenSolver }) {
   return (
     <div className="home">
       {/* Background effects */}
@@ -83,15 +83,34 @@ export default function HomeScreen({ onSelectGameType, onOpenSimulator }) {
 
       {/* Simulator Card */}
       {onOpenSimulator && (
-        <div className="home__simulator" style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1100px', marginBottom: 'var(--space-3xl)' }}>
+        <div className="home__simulator" style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1100px', marginBottom: 'var(--space-lg, 16px)' }}>
           <button
             className="home__simulator-btn"
             onClick={onOpenSimulator}
           >
             <span className="home__simulator-icon">🧪</span>
             <div className="home__simulator-text">
-              <h3 className="home__simulator-title">Simulador de Situações</h3>
+              <h3 className="home__simulator-title">Simulador de Situações (heurística preflop)</h3>
               <p className="home__simulator-desc">Crie cenários personalizados e analise a melhor jogada</p>
+            </div>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M8 4L14 10L8 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      )}
+
+      {/* Real Postflop Solver Card */}
+      {onOpenSolver && (
+        <div className="home__simulator" style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '1100px', marginBottom: 'var(--space-3xl)' }}>
+          <button
+            className="home__simulator-btn"
+            onClick={onOpenSolver}
+          >
+            <span className="home__simulator-icon">🧮</span>
+            <div className="home__simulator-text">
+              <h3 className="home__simulator-title">Solver Real Pós-Flop (CFR)</h3>
+              <p className="home__simulator-desc">Resolve flop→river com CFR de verdade: ranges, blockers, multiway e side pots</p>
             </div>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M8 4L14 10L8 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
